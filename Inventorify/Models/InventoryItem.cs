@@ -14,9 +14,14 @@ namespace Inventorify.Models
         [Required]
         public string Name { get; set; }
 
-        public string Type { get; set; }
+        public string Group { get; set; }
 
         [Required]
         public int Count { get; set; }
+
+        [Required]
+        public float UnitPrice { get; set; }
+
+        public double TotalPrice { get; set; }
     }
 }

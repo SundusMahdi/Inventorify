@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inventorify.Migrations
 {
     [DbContext(typeof(ApplicationIdentityDbContext))]
-    [Migration("20200707233137_AddInventorifyToDb")]
-    partial class AddInventorifyToDb
+    [Migration("20200708183847_addInventorifyToDb")]
+    partial class addInventorifyToDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,12 +31,18 @@ namespace Inventorify.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
+                    b.Property<string>("Group")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
+
+                    b.Property<float>("UnitPrice")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 

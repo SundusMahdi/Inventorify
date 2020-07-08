@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Inventorify.Migrations
 {
-    public partial class AddInventorifyToDb : Migration
+    public partial class addInventorifyToDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,8 +53,10 @@ namespace Inventorify.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
-                    Type = table.Column<string>(nullable: true),
-                    Count = table.Column<int>(nullable: false)
+                    Group = table.Column<string>(nullable: true),
+                    Count = table.Column<int>(nullable: false),
+                    UnitPrice = table.Column<float>(nullable: false),
+                    TotalPrice = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {

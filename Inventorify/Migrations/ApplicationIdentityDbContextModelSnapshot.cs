@@ -29,12 +29,18 @@ namespace Inventorify.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
+                    b.Property<string>("Group")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
+
+                    b.Property<float>("UnitPrice")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 

@@ -12,9 +12,11 @@ function loadDataTable() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "name", "width": "25%" },
-            { "data": "type", "width": "25%" },
-            { "data": "count", "width": "25%" },
+            { "data": "name", "width": "15%" },
+            { "data": "group", "width": "15%" },
+            { "data": "count", "width": "15%" },
+            { "data": "unitPrice", "width": "15%" },
+            { "data": "totalPrice", "width": "15%" },
             {
                 "data": "id",
                 "render": function (data) {
