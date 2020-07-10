@@ -1,5 +1,6 @@
 # Inventorify
 A web app that allows you to view and manage your inventory thorugh a UI or API.
+To run the web app, clone the project and open Inventorify.sln in Visual Studio, from there, build and run the app.
 
 ### Seeding the database
 The database does not need to be manually seeded. If the database is empty the databse will automatically seed with 9 data entries. <br/>
