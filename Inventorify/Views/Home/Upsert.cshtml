@@ -34,7 +34,7 @@
                 <label asp-for="Count"></label>
             </div>
             <div class="col-6">
-                <input asp-for="Count" id="count" class="form-control" onblur="updateTotalPrice()"/>
+                <input asp-for="Count" class="form-control" />
                 <span asp-validation-for="Count" class="text-danger"></span>
             </div>
         </div>
@@ -43,11 +43,10 @@
                 <label asp-for="UnitPrice"></label>
             </div>
             <div class="col-6">
-                <input asp-for="UnitPrice" id="unitPrice" class="form-control" step=".01" onblur="updateTotalPrice()"/>
+                <input asp-for="UnitPrice" class="form-control" step=".01" />
                 <span asp-validation-for="UnitPrice" class="text-danger"></span>
             </div>
         </div>
-        <input type="hidden" asp-for="TotalPrice" id="totalPrice"/>
 
         <div class="form-group row">
             <div class="col-3 offset-3">
@@ -63,13 +62,9 @@
 </div>
 
 @section Scripts
-{   
+{
     <script>
-        function updateTotalPrice() {
-            document.getElementById("totalPrice").value =
-                (document.getElementById("count").value *
-                    document.getElementById("unitPrice").value).toFixed(2);
-        }
+        function displayWarnings() { }
     </script>
     <partial name="_ValidationScriptsPartial" />
 }

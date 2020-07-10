@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Inventorify.Migrations
 {
-    public partial class addInventorifyToDb : Migration
+    public partial class AddInventorifyToDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

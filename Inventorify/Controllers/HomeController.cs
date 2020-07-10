@@ -13,26 +13,34 @@ namespace Inventorify.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly ApplicationIdentityDbContext _db;
 
         [BindProperty]
         public InventoryItem InventoryItem { get; set; }
 
-        public HomeController(ILogger<HomeController> logger, ApplicationIdentityDbContext db)
+        public HomeController(ApplicationIdentityDbContext db)
         {
-            _logger = logger;
             _db = db;
         }
 
         public IActionResult Index()
         {
+            // Reseed the database
+            ReSeedDb rDb = new ReSeedDb(_db);
+            rDb.SeedDb();
+
             return View();
         }
 
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         public IActionResult Upsert(int? id)
@@ -52,6 +60,7 @@ namespace Inventorify.Controllers
             return View(InventoryItem);
         }
 
+        #region API Calls
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert()
@@ -61,10 +70,12 @@ namespace Inventorify.Controllers
                 if (InventoryItem.Id == 0)
                 {
                     //create
+                    InventoryItem.TotalPrice = Math.Round(InventoryItem.UnitPrice * InventoryItem.Count, 2);
                     _db.InventoryItems.Add(InventoryItem);
                 }
                 else
                 {
+                    InventoryItem.TotalPrice = Math.Round(InventoryItem.UnitPrice * InventoryItem.Count, 2);
                     _db.InventoryItems.Update(InventoryItem);
                 }
                 _db.SaveChanges();
@@ -73,13 +84,6 @@ namespace Inventorify.Controllers
             return View(InventoryItem);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        #region API Calls
         [HttpGet]
         public async Task<IActionResult> GetAll() 
         {

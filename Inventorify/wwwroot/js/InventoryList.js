@@ -1,4 +1,5 @@
 ﻿var dataTable;
+var restock = 0;
 
 $(document).ready(function () {
     loadDataTable();
@@ -7,14 +8,25 @@ $(document).ready(function () {
 function loadDataTable() {
     dataTable = $('#DT_load').DataTable({
         "ajax": {
-            "url": "/home/getall/",
+            "url": "home/getall",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
             { "data": "name", "width": "15%" },
             { "data": "group", "width": "15%" },
-            { "data": "count", "width": "15%" },
+            {
+                "data": "count",
+                "render": function (data) {
+                    if (data < 100) {
+                        restock += .25;
+                        return `<div class='text-danger'>${data}</div>`;
+                    }
+                    else {
+                        return `${data}`;
+                    }
+                }, "width": "15%"
+            },
             { "data": "unitPrice", "width": "15%" },
             { "data": "totalPrice", "width": "15%" },
             {
@@ -63,4 +75,17 @@ function Delete(url) {
             });
         }
     });
+}
+
+function displayWarnings() {
+    var e = document.getElementById("restockWarning");
+    if (restock == 0) {
+        e.innerHTML = null;
+    } else if (restock == 1) {
+        e.style.diplay = "block";
+        e.innerHTML = '<img class="mr-1 mb-1" src="danger.png" height="20"/> 1 item needs to be restocked';
+    } else if (restock > 1) {
+        e.style.diplay = "block";
+        e.innerHTML = '<img class="mr-1 mb-1" src="danger.png" height="20"/>' + restock + ' items need to be restocked';
+    }
 }

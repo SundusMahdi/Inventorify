@@ -26,6 +26,7 @@ namespace Inventorify
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationIdentityDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<InventoryItem>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
@@ -43,6 +44,7 @@ namespace Inventorify
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();

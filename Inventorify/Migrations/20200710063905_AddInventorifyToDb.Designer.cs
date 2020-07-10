@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inventorify.Migrations
 {
     [DbContext(typeof(ApplicationIdentityDbContext))]
-    [Migration("20200708183847_addInventorifyToDb")]
-    partial class addInventorifyToDb
+    [Migration("20200710063905_AddInventorifyToDb")]
+    partial class AddInventorifyToDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
