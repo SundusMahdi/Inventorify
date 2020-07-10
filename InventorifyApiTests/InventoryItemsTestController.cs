@@ -82,7 +82,7 @@ namespace Inventorify.Api
         }
 
         [Fact]
-        public async Task PutInventoryItem_NoId()
+        public async Task PutInventoryItemNoId()
         {
             // Arrange
             var jsonString = JsonConvert.SerializeObject(new {name = "Tape", group = "Office Supplies", count = 280, unitPrice = (float)4.25 });
@@ -157,7 +157,7 @@ namespace Inventorify.Api
         }
 
         [Fact]
-        public async Task Delete_NoId()
+        public async Task DeleteNoId()
         {
             // Act
             var httpResponse = await _client.DeleteAsync("/api/inventoryItems");

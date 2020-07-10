@@ -83,9 +83,9 @@ function displayWarnings() {
         e.innerHTML = null;
     } else if (restock == 1) {
         e.style.diplay = "block";
-        e.innerHTML = '<img class="mr-1 mb-1" src="danger.png" height="20"/> 1 item needs to be restocked';
+        e.innerHTML = '<img class="mr-1 mb-1" src="icons/danger.png" height="20"/> 1 item needs to be restocked';
     } else if (restock > 1) {
         e.style.diplay = "block";
-        e.innerHTML = '<img class="mr-1 mb-1" src="danger.png" height="20"/>' + restock + ' items need to be restocked';
+        e.innerHTML = '<img class="mr-1 mb-1" src="icons/danger.png" height="20"/>' + restock + ' items need to be restocked';
     }
 }

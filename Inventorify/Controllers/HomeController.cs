@@ -23,6 +23,7 @@ namespace Inventorify.Controllers
             _db = db;
         }
 
+        // Reseed if necessary then render index page
         public IActionResult Index()
         {
             // Reseed the database
@@ -32,17 +33,7 @@ namespace Inventorify.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
+        // render create/edit page
         public IActionResult Upsert(int? id)
         {
             InventoryItem = new InventoryItem();
@@ -61,6 +52,7 @@ namespace Inventorify.Controllers
         }
 
         #region API Calls
+        // Post edited or new InventoryItem
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert()
@@ -69,12 +61,13 @@ namespace Inventorify.Controllers
             {
                 if (InventoryItem.Id == 0)
                 {
-                    //create
+                    // Create
                     InventoryItem.TotalPrice = Math.Round(InventoryItem.UnitPrice * InventoryItem.Count, 2);
                     _db.InventoryItems.Add(InventoryItem);
                 }
                 else
                 {
+                    // Edit
                     InventoryItem.TotalPrice = Math.Round(InventoryItem.UnitPrice * InventoryItem.Count, 2);
                     _db.InventoryItems.Update(InventoryItem);
                 }
@@ -84,12 +77,14 @@ namespace Inventorify.Controllers
             return View(InventoryItem);
         }
 
+        // Get all items in database and return json
         [HttpGet]
         public async Task<IActionResult> GetAll() 
         {
             return Json(new { data = await _db.InventoryItems.ToListAsync() });
         }
 
+        // delete data by id
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
